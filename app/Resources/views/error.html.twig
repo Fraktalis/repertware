@@ -1,0 +1,7 @@
+{% extends "::layout.html.twig" %}
+
+{% block body %}
+<div class="alert alert-danger" role="alert">
+    <strong>Erreur :</strong> {{ message }} Retourner <a class="alert-link" href={{ path("homepage") }}>à l'accueil. </a>
+</div>
+{% endblock %}

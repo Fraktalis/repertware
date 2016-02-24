@@ -1,0 +1,7 @@
+vincentale_repertoire:
+    resource: "@VincentaleRepertoireBundle/Resources/config/routing.yml"
+    prefix:   /
+
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation

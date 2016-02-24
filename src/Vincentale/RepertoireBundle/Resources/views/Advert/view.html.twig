@@ -1,0 +1,25 @@
+{# src/Vincentale/RepertoireBundle/Resources/views/Advert/index.html.twig #}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bienvenue sur ma première page avec OpenClassrooms !</title>
+  </head>
+  <body>
+    <h1>Affichage d'un profil</h1>
+
+    <p>
+      {# On affiche tous les messages flash dont le nom est « info » #}
+      {% for message in app.session.flashbag.get('info') %}
+        <p>Message flash : {{ message }}</p>
+      {% endfor %}
+    </p>
+
+    <p>
+      Ici nous pourrons lire l'annonce ayant comme id : {{ user.id }}<br />
+        Nom : {{ user.name }} <br>
+        Login : {{ user.login }} <br>
+        Email : {{ user.email }}
+    </p>
+  </body>
+</html>

@@ -1,0 +1,4 @@
+services:
+#    vincentale_repertoire.example:
+#        class: Vincentale\RepertoireBundle\Example
+#        arguments: ["@service_id", "plain_value", %parameter%]

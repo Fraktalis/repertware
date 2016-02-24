@@ -1,0 +1,22 @@
+vincentale_repertoire_homepage:
+    path:     /
+    defaults: { _controller: VincentaleRepertoireBundle:Default:index }	
+rep_home:
+    path:      /rep
+    defaults:  { _controller: VincentaleRepertoireBundle:Advert:index }
+    
+rep_view:
+    path:      /rep/advert/{id}
+    defaults:  { _controller: VincentaleRepertoireBundle:Advert:view }
+    
+rep_add:
+    path:      /rep/add
+    defaults:  { _controller: VincentaleRepertoireBundle:Advert:add }
+
+rep_view_slug:
+    path:      /rep/{year}/{slug}.{_format}
+    defaults:
+        _controller: VincentaleRepertoireBundle:Advert:viewSlug
+        _format:      html
+    requirements:
+        year:   \d{4}

@@ -1,0 +1,59 @@
+{%  extends "VincentaleUserBundle:layout.html.twig" %}
+
+{% block fos_user_content %}
+    <hr class="">
+    <div class="row text-center">
+        {% for contact in contacts  %}
+                <div class="col-md-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            {% if app.user and app.user.getId != contact.getId %}
+                               <h3 class=""><a href="{{ path('vincentale_contact_view',{'id': contact.id }) }}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{ contact.username }}</a></h3>
+                            {% else %}
+                                <h3 class=""><a href="{{ path('vincentale_contact_view',{'id': contact.id }) }}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Mon profil</a></h3>
+                            {% endif %}
+                            {% if contact.nom != '' and contact.prenom != '' %}
+                                <h5><i> - {{ contact.prenom }} {{ contact.nom|upper }} - </i></h5>
+                            {% endif %}
+                        </div>
+                        <div class="panel-body">
+                            {% if contact.email != '' %}
+                                <p><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> {{ contact.email }}</p>
+                            {% endif %}
+                            {% if contact.tel != '' %}
+                                <p><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> {{ contact.tel }}</p>
+                            {% endif %}
+                            {% if contact.website != '' %}
+                                <p><span class="glyphicon glyphicon-globe" aria-hidden="true"></span> {{ contact.website }}</p>
+                            {% endif %}
+                            {% if contact.adress != '' %}
+                                <p><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> {{ contact.adress }}</p>
+                            {% endif %}
+                        </div>
+                        <div class="panel-footer">
+                            {% if app.user %}
+                                {% if app.user.getId != contact.getId %}
+                                    {% if not app.user.hasContact(contact) %}
+                                        <h3 class="">
+                                            <a class=" btn btn-success" href="{{ path('vincentale_contact_add',{'id': contact.id }) }}">
+                                                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Ajouter aux contacts
+                                            </a>
+                                        </h3>
+                                    {% else %}
+                                        <h3 class="">
+                                            <a class=" btn btn-danger" href="{{ path('vincentale_contact_del',{'id': contact.id }) }}">
+                                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Supprimer des contacts</a>
+                                        </h3>
+                                    {% endif %}
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% if loop.index % 3 == 0 %}
+                </div>
+                <div class="row text-center">
+                {% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}

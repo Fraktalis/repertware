@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{% block title %}Repertware{% endblock %}</title>
+
+    {% block stylesheets %}
+        {# Vanilla Bootstrap CSS #}
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css">
+    {% endblock %}
+    {% block javascripts %}
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    {% endblock %}
+</head>
+<body>
+<div class="container">
+    <nav id="header" class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href={{ path("homepage") }}>Repertware</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    {% if not is_granted("IS_AUTHENTICATED_FULLY") %}
+                        <li>
+                            <a class="" href="{{ path('fos_user_security_login') }}">
+                                <span class="glyphicon glyphicon-log-in"></span> Connexion
+                            </a>
+                        </li>
+                        <li>
+                            <a class="" href="{{ path('fos_user_registration_register') }}">
+                                <span class="glyphicon glyphicon-floppy-open"></span> Inscription
+                            </a>
+                        </li>
+                    {% else %}
+
+                        <li>
+                            <a class="" href="{{ path('fos_user_profile_show') }}">
+                                <span class="glyphicon glyphicon-home"></span> Mon profil
+                            </a>
+                        </li>
+                        <li>
+                            <a class="" href="{{ path('vincentale_contact_display') }}">
+                                <span class="glyphicon glyphicon-comment"></span> Mes contacts
+                            </a>
+                        </li>
+                        <li>
+                            <a class="" href="{{ path('fos_user_security_logout') }}">
+                                <span class="glyphicon glyphicon-off"></span> Déconnexion
+                            </a>
+                        </li>
+
+                    {% endif %}
+                </ul>
+                <form class="navbar-form navbar-right" method="POST" action="{{ path('vincentale_contact_search') }}" role="search" aria-required>
+                    <div class="form-group">
+                        <input type="text" id="partial_username" name="partial_username" class="form-control" placeholder="Entrez un nom...">
+                    </div>
+                    <button type="submit" class="btn btn-default">Rechercher</button>
+                </form>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+    <div id="header" class="jumbotron text-center">
+        <h1>Votre carnet d'adresses en ligne</h1>
+        <p>
+            Ce projet est propulsé par Symfony2,
+            et construit grâce au MOOC OpenClassrooms et SensioLabs.
+        </p>
+        <hr>
+        <p>
+            {% if is_granted("IS_AUTHENTICATED_FULLY") %}
+               Bonjour à vous,
+
+                {% if app.user.prenom != '' %}
+            <strong> {{ app.user.prenom }} </strong> <span class="glyphicon glyphicon-heart"></span>
+                {% else %}
+            <strong> {{ app.user.username }}</strong>. N'hésitez pas à aller <a href="{{ path('fos_user_profile_edit') }}">modifier</a> votre profil !
+                {% endif %}
+            {% endif %}
+        </p>
+    </div>
