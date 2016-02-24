@@ -1,4 +1,4 @@
-# repertware
+# Repertware
 Repertoire en ligne (v1)
 
 Site en ligne permettant l'ajout, la suppression et la visualisation de contacts.
