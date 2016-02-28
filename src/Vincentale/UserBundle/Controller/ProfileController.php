@@ -20,7 +20,7 @@ class ProfileController extends Controller
 
 
     public function showAction(Request $request) {
-        if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_ANONYMOUSLY')){
+        if (!$this->get('security.authorization_checker')->isGranted('ROLE_USER')){
             $request->getSession()->getFlashBag()->add('danger', 'Vous devez être connecté pour effectuer cette action.');
             return $this->redirectToRoute('fos_user_security_login');
         }
@@ -35,7 +35,7 @@ class ProfileController extends Controller
 
     public function editAction(Request $request)
     {
-        if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_ANONYMOUSLY')){
+        if (!$this->get('security.authorization_checker')->isGranted('ROLE_USER')){
             $request->getSession()->getFlashBag()->add('danger', 'Vous devez être connecté pour effectuer cette action.');
             return $this->redirectToRoute('fos_user_security_login');
         }
